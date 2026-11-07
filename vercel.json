@@ -1,0 +1,11 @@
+{
+  "builds": [
+    { "src": "api/recognize.py", "use": "@vercel/python" },
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "*.js", "use": "@vercel/static" },
+    { "src": "*.css", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "/api/recognize", "dest": "/api/recognize.py" }
+  ]
+}
