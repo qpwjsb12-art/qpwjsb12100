@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>그린공차 영상검토</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header class="hero" id="hero">
+    <p class="logo">그린공차 영상검토</p>
+    <h1>올리기 전에, 영상을 검토해드려요</h1>
+    <p class="sub">자막과 폰트를 찾고, 브금과 저작권 위험을 알려드려요.</p>
+    <label class="file-btn" id="fileLabel">
+      내 영상 파일 올리기
+      <input type="file" id="fileInput" accept=".mp4,.mov,.webm,.mkv,.m4v,video/*">
+    </label>
+    <p class="form-error" id="formError" hidden></p>
+    <p class="ai-off">영상은 내 컴퓨터 안에서 분석해요. 곡을 찾을 때만 소리 조각을 보내요. 유튜브/인스타 영상은 파일로 저장해서 올려주세요.</p>
+  </header>
+
+  <section class="progress" id="progressBox" hidden>
+    <ol class="steps" id="stepList"></ol>
+  </section>
+
+  <main class="report" id="report" hidden>
+    <section class="video-head">
+      <div class="player-wrap">
+        <video id="player" controls playsinline></video>
+        <div class="caption-overlay" id="captionOverlay" hidden></div>
+      </div>
+      <div class="video-info">
+        <h2 id="videoTitle"></h2>
+        <p id="videoUploader"></p>
+        <div class="font-hero" id="fontHero"></div>
+      </div>
+    </section>
+
+    <section class="timeline" id="timeline" aria-label="타임라인">
+      <div class="lane-names"><span>소리</span><span>브금</span><span>자막</span></div>
+      <div class="lanes" id="lanes">
+        <canvas id="waveCanvas" height="56"></canvas>
+        <div class="lane" id="laneBgm"></div>
+        <div class="lane" id="laneSub"></div>
+        <div class="playhead" id="playhead"></div>
+      </div>
+    </section>
+
+    <div class="columns">
+      <section class="block">
+        <h3 class="sub-color">자막</h3>
+        <p class="note" id="subSource"></p>
+        <div id="subList" class="sub-list"></div>
+      </section>
+      <div class="side">
+        <section class="block">
+          <h3>폰트 후보</h3>
+          <p class="note">글자 모양을 비교한 결과예요. 후보 39개 안에서만 찾고 틀릴 수 있어서, 원본과 눈으로 비교해 보세요.</p>
+          <div id="fontList"></div>
+        </section>
+        <section class="block">
+          <h3>저작권 점검</h3>
+          <div id="copyrightBox"></div>
+        </section>
+        <section class="block">
+          <h3 class="bgm">브금</h3>
+          <div id="bgmList"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/opentype.js@1.3.4/dist/opentype.min.js"></script>
+<script type="module" src="script.js"></script>
+</body>
+</html>
